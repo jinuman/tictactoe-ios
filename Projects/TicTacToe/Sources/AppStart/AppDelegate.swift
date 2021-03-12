@@ -14,8 +14,9 @@
 //  limitations under the License.
 //
 
-import RIBs
 import UIKit
+import RIBs
+import Then
 
 /// Game app delegate.
 @UIApplicationMain

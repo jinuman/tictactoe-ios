@@ -15,7 +15,65 @@ protocol LoggedOutPresentableListener: class {
     // interactor class.
 }
 
-final class LoggedOutViewController: UIViewController, LoggedOutPresentable, LoggedOutViewControllable {
+final class LoggedOutViewController:
+    BaseViewController,
+    LoggedOutPresentable,
+    LoggedOutViewControllable {
+
+    // MARK: - Properties
 
     weak var listener: LoggedOutPresentableListener?
+
+
+    // MARK: - UI
+
+    private let player1Field = UITextField().then {
+        $0.borderStyle = .line
+        $0.placeholder = "Player 1 name"
+    }
+    private let player2Field = UITextField().then {
+        $0.borderStyle = .line
+        $0.placeholder = "Player 2 name"
+    }
+    private lazy var loginButton = UIButton().then {
+        $0.setTitle("Login", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.backgroundColor = UIColor.black
+        $0.addTarget(self, action: #selector(self.didTapLoginButton), for: .touchUpInside)
+    }
+
+
+    // MARK: - View Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .white
+    }
+
+
+    // MARK: - Layout
+
+    override func configureLayout() {
+        self.view.addSubview(self.player1Field)
+        self.view.addSubview(self.player2Field)
+        self.view.addSubview(self.loginButton)
+
+        self.player1Field.snp.makeConstraints {
+            $0.top.equalTo(self.view).offset(100)
+            $0.leading.trailing.equalTo(self.view).inset(40)
+            $0.height.equalTo(40)
+        }
+        self.player2Field.snp.makeConstraints {
+            $0.top.equalTo(self.player1Field.snp.bottom).offset(20)
+            $0.left.right.height.equalTo(self.player1Field)
+        }
+        self.loginButton.snp.makeConstraints {
+            $0.top.equalTo(self.player2Field.snp.bottom).offset(20)
+            $0.left.right.height.equalTo(self.player1Field)
+        }
+    }
+
+    @objc private func didTapLoginButton() {
+        print("didTapLoginButton")
+    }
 }
