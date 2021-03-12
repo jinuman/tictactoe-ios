@@ -75,6 +75,9 @@ final class LoggedOutViewController:
     }
 
     @objc private func didTapLoginButton() {
-        print("didTapLoginButton")
+        self.listener?.login(
+            withPlayer1Name: self.player1Field.text,
+            player2Name: self.player2Field.text
+        )
     }
 }
