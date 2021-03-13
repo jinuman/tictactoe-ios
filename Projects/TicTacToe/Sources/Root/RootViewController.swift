@@ -39,7 +39,7 @@ final class RootViewController: UIViewController, RootPresentable, RootViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.white
     }
 
     // MARK: - RootViewControllable
@@ -48,3 +48,7 @@ final class RootViewController: UIViewController, RootPresentable, RootViewContr
         present(viewController.uiviewController, animated: true, completion: nil)
     }
 }
+
+// MARK: LoggedInViewControllable
+
+extension RootViewController: LoggedInViewControllable {}
