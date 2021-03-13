@@ -30,7 +30,10 @@ protocol RootListener: class {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteractable, RootPresentableListener {
+final class RootInteractor:
+    PresentableInteractor<RootPresentable>,
+    RootInteractable,
+    RootPresentableListener {
 
     weak var router: RootRouting?
 
@@ -51,5 +54,12 @@ final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteract
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+
+
+    // MARK: LoggedOutListener
+
+    func didLogin(withPlayer1Name player1Name: String, player2Name: String) {
+        print("\(player1Name) vs \(player2Name)")
     }
 }
