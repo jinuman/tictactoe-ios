@@ -52,11 +52,10 @@ final class RootRouter:
 
     override func didLoad() {
         super.didLoad()
-
-        self.routeToLoggedOut()
+        self.attachLoggedOut()
     }
 
-    private func routeToLoggedOut() {
+    private func attachLoggedOut() {
         let loggedOut = self.loggedOutBuilder.build(withListener: self.interactor)
         self.loggedOut = loggedOut
         self.attachChild(loggedOut)
