@@ -10,7 +10,7 @@ import RxSwift
 
 protocol LoggedInRouting: Routing {
     func cleanupViews()
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func routeToTicTacToe()
 }
 
 protocol LoggedInListener: class {
@@ -42,6 +42,7 @@ final class LoggedInInteractor: Interactor, LoggedInInteractable {
     // MARK: OffGameListener
 
     func startTicTacToe() {
-        print("이제 Router 와 연결할 차례")
+        self.router?.routeToTicTacToe()
+    }
     }
 }
