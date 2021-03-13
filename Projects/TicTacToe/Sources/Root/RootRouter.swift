@@ -23,6 +23,7 @@ protocol RootInteractable: Interactable, LoggedOutListener {
 
 protocol RootViewControllable: ViewControllable {
     func present(viewController: ViewControllable)
+    func dismiss(viewController: ViewControllable)
 }
 
 final class RootRouter:
