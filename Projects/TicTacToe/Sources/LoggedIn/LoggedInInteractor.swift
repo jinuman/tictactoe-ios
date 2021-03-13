@@ -37,4 +37,11 @@ final class LoggedInInteractor: Interactor, LoggedInInteractable {
         router?.cleanupViews()
         // TODO: Pause any business logic.
     }
+
+
+    // MARK: OffGameListener
+
+    func startTicTacToe() {
+        print("이제 Router 와 연결할 차례")
+    }
 }
