@@ -21,4 +21,45 @@ final class OffGameViewController:
     OffGameViewControllable {
 
     weak var listener: OffGamePresentableListener?
+
+    var uiviewController: UIViewController {
+        return self
+    }
+
+
+    // MARK: UI
+
+    private let startButton = UIButton().then {
+        $0.setTitle("Start Game", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = .black
+    }
+
+
+    // MARK: - Initializing
+
+    override init() {
+        super.init()
+    }
+
+
+    // MARK: - View Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor.yellow
+    }
+
+
+    // MARK: - Layout
+
+    override func configureLayout() {
+        self.view.addSubview(self.startButton)
+
+        self.startButton.snp.makeConstraints {
+            $0.center.equalTo(self.view)
+            $0.leading.trailing.equalTo(self.view).inset(40)
+            $0.height.equalTo(100)
+        }
+    }
 }
