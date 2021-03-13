@@ -67,6 +67,15 @@ final class RootRouter:
     // MARK: RootRouting
 
     func routeToLoggedIn(withPlayer1Name player1Name: String, player2Name: String) {
-        print("\(player1Name) vs \(player2Name)")
+        // Detatch LoggedOut RIB.
+        if let loggedOut = self.loggedOut {
+            self.detachChild(loggedOut)
+            self.viewController.dismiss(viewController: loggedOut.viewControllable)
+            self.loggedOut = nil
+        }
+
+        // Attach LoggedIn RIB.
+        let loggedIn = self.loggedInBuilder.build(withListener: self.interactor)
+        self.attachChild(loggedIn)
     }
 }
