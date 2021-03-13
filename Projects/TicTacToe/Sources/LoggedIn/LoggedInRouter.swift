@@ -92,4 +92,10 @@ final class LoggedInRouter:
         self.attachChild(ticTacToe)
         self.viewController.present(viewController: ticTacToe.viewControllable)
     }
+
+    func routeToOffGame() {
+        self.detachCurrentChild()
+
+        self.attachOffGame()
+    }
 }

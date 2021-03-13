@@ -72,7 +72,7 @@ final class TicTacToeInteractor: PresentableInteractor<TicTacToePresentable>, Ti
     }
 
     func closeGame() {
-        listener?.gameDidEnd()
+        self.listener?.gameDidEnd()
     }
 
     // MARK: - Private

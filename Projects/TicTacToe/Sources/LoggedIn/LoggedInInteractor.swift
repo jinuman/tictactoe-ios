@@ -11,6 +11,7 @@ import RxSwift
 protocol LoggedInRouting: Routing {
     func cleanupViews()
     func routeToTicTacToe()
+    func routeToOffGame()
 }
 
 protocol LoggedInListener: class {
@@ -44,5 +45,11 @@ final class LoggedInInteractor: Interactor, LoggedInInteractable {
     func startTicTacToe() {
         self.router?.routeToTicTacToe()
     }
+
+
+    // MARK: TicTacToeListener
+
+    func gameDidEnd() {
+        self.router?.routeToOffGame()
     }
 }
