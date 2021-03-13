@@ -32,6 +32,7 @@ final class RootRouter:
     // MARK: - Private
 
     private let loggedOutBuilder: LoggedOutBuildable
+    private let loggedInBuilder: LoggedInBuildable
 
     private var loggedOut: ViewableRouting?
 
@@ -39,9 +40,11 @@ final class RootRouter:
     init(
         interactor: RootInteractable,
         viewController: RootViewControllable,
-        loggedOutBuilder: LoggedOutBuildable
+        loggedOutBuilder: LoggedOutBuildable,
+        loggedInBuilder: LoggedInBuildable
     ) {
         self.loggedOutBuilder = loggedOutBuilder
+        self.loggedInBuilder = loggedInBuilder
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
