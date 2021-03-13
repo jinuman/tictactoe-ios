@@ -24,17 +24,15 @@ protocol RootPresentableListener: class {
     // interactor class.
 }
 
-final class RootViewController: UIViewController, RootPresentable, RootViewControllable {
+final class RootViewController:
+    BaseViewController,
+    RootPresentable,
+    RootViewControllable {
 
     weak var listener: RootPresentableListener?
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("Method is not supported")
-    }
+    // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
