@@ -40,10 +40,14 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     override func didLoad() {
         super.didLoad()
 
-        let loggedOut = loggedOutBuilder.build(withListener: interactor)
+        self.routeToLoggedOut()
+    }
+
+    private func routeToLoggedOut() {
+        let loggedOut = self.loggedOutBuilder.build(withListener: self.interactor)
         self.loggedOut = loggedOut
-        attachChild(loggedOut)
-        viewController.present(viewController: loggedOut.viewControllable)
+        self.attachChild(loggedOut)
+        self.viewController.present(viewController: loggedOut.viewControllable)
     }
 
     // MARK: - Private
