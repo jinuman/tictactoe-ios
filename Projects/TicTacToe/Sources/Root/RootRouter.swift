@@ -25,7 +25,16 @@ protocol RootViewControllable: ViewControllable {
     func present(viewController: ViewControllable)
 }
 
-final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
+final class RootRouter:
+    LaunchRouter<RootInteractable, RootViewControllable>,
+    RootRouting {
+
+    // MARK: - Private
+
+    private let loggedOutBuilder: LoggedOutBuildable
+
+    private var loggedOut: ViewableRouting?
+
 
     init(
         interactor: RootInteractable,
@@ -50,9 +59,10 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
         self.viewController.present(viewController: loggedOut.viewControllable)
     }
 
-    // MARK: - Private
 
-    private let loggedOutBuilder: LoggedOutBuildable
+    // MARK: RootRouting
 
-    private var loggedOut: ViewableRouting?
+    func routeToLoggedIn(withPlayer1Name player1Name: String, player2Name: String) {
+        print("\(player1Name) vs \(player2Name)")
+    }
 }
