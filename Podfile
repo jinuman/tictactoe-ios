@@ -10,7 +10,7 @@ pod 'RxSwift', '~> 5'
 pod 'RxCocoa'
 
 # Architecture
-pod 'RIBs', git: 'https://github.com/uber/RIBs', tag: '0.9.2'
+pod 'RIBs', git: 'https://github.com/uber/RIBs', tag: 'v0.10.1'
 
 # UI
 pod 'SnapKit'
