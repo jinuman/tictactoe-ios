@@ -31,7 +31,6 @@ final class RootViewController:
 
     weak var listener: RootPresentableListener?
 
-
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -39,6 +38,7 @@ final class RootViewController:
 
         self.view.backgroundColor = UIColor.white
     }
+
 
     // MARK: - RootViewControllable
 
