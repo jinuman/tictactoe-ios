@@ -22,6 +22,8 @@ final class OffGameViewController:
     OffGamePresentable,
     OffGameViewControllable {
 
+    // MARK: - Properties
+
     weak var listener: OffGamePresentableListener?
 
     var uiviewController: UIViewController {
