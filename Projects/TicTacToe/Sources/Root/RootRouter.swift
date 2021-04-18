@@ -74,7 +74,11 @@ final class RootRouter:
         }
 
         // Attach LoggedIn RIB.
-        let loggedIn = self.loggedInBuilder.build(withListener: self.interactor)
+        let loggedIn = self.loggedInBuilder.build(
+            withListener: self.interactor,
+            player1Name: player1Name,
+            player2Name: player2Name
+        )
         self.attachChild(loggedIn)
     }
 }
