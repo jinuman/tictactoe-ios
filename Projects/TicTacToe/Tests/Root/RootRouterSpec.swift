@@ -28,7 +28,7 @@ final class RootRouterSpec: QuickSpec {
 
         // This is an example of a router test case.
         // Test your router functions invokes the corresponding builder, attachesChild, presents VC, etc.
-        context("When routeToLoggedIn()") {
+        context("routeToLoggedIn()") {
             it("LoggedInBuildable 프로토콜의 build() 메소드를 호출하고 return 된 Router 를 attach 합니다.") {
                 // given
                 let loggedInRouter = LoggedInRoutingMock(interactable: LoggedInInteractableMock())

@@ -45,24 +45,42 @@ class LoggedInBuildableMock: LoggedInBuildable {
 /// A LoggedInInteractableMock class used for testing.
 class LoggedInInteractableMock: LoggedInInteractable {
     // Variables
-    var router: LoggedInRouting? { didSet { routerSetCallCount += 1 } }
+    var router: LoggedInRouting? {
+        didSet {
+            routerSetCallCount += 1
+        }
+    }
     var routerSetCallCount = 0
-    var listener: LoggedInListener? { didSet { listenerSetCallCount += 1 } }
+    var listener: LoggedInListener? {
+        didSet {
+            listenerSetCallCount += 1
+        }
+    }
     var listenerSetCallCount = 0
-    var isActive: Bool = false { didSet { isActiveSetCallCount += 1 } }
+    var isActive: Bool = false {
+        didSet {
+            isActiveSetCallCount += 1
+        }
+    }
     var isActiveSetCallCount = 0
-    var isActiveStreamSubject: PublishSubject<Bool> = PublishSubject<Bool>() { didSet { isActiveStreamSubjectSetCallCount += 1 } }
+    var isActiveStreamSubject: PublishSubject<Bool> = PublishSubject<Bool>() {
+        didSet {
+            isActiveStreamSubjectSetCallCount += 1
+        }
+    }
     var isActiveStreamSubjectSetCallCount = 0
-    var isActiveStream: Observable<Bool> { return isActiveStreamSubject }
+    var isActiveStream: Observable<Bool> {
+        return isActiveStreamSubject
+    }
 
     // Function Handlers
-    var activateHandler: (() -> ())?
+    var activateHandler: (() -> Void)?
     var activateCallCount: Int = 0
-    var deactivateHandler: (() -> ())?
+    var deactivateHandler: (() -> Void)?
     var deactivateCallCount: Int = 0
-    var startTicTacToeHandler: (() -> ())?
+    var startTicTacToeHandler: (() -> Void)?
     var startTicTacToeCallCount: Int = 0
-    var gameDidEndHandler: (() -> ())?
+    var gameDidEndHandler: (() -> Void)?
     var gameDidEndCallCount: Int = 0
 
     init() {
@@ -102,26 +120,40 @@ class LoggedInInteractableMock: LoggedInInteractable {
 /// A LoggedInRoutingMock class used for testing.
 class LoggedInRoutingMock: LoggedInRouting {
     // Variables
-    var interactable: Interactable { didSet { interactableSetCallCount += 1 } }
+    var interactable: Interactable {
+        didSet {
+            self.interactableSetCallCount += 1
+        }
+    }
     var interactableSetCallCount = 0
-    var children: [Routing] = [Routing]() { didSet { childrenSetCallCount += 1 } }
+
+    var children: [Routing] = [Routing]() {
+        didSet {
+            self.childrenSetCallCount += 1
+        }
+    }
     var childrenSetCallCount = 0
-    var lifecycleSubject: PublishSubject<RouterLifecycle> = PublishSubject<RouterLifecycle>() { didSet { lifecycleSubjectSetCallCount += 1 } }
+
+    var lifecycleSubject: PublishSubject<RouterLifecycle> = PublishSubject<RouterLifecycle>() {
+        didSet {
+            lifecycleSubjectSetCallCount += 1
+        }
+    }
     var lifecycleSubjectSetCallCount = 0
     var lifecycle: Observable<RouterLifecycle> { return lifecycleSubject }
 
     // Function Handlers
-    var cleanupViewsHandler: (() -> ())?
+    var cleanupViewsHandler: (() -> Void)?
     var cleanupViewsCallCount: Int = 0
-    var routeToTicTacToeHandler: (() -> ())?
+    var routeToTicTacToeHandler: (() -> Void)?
     var routeToTicTacToeCallCount: Int = 0
-    var routeToOffGameHandler: (() -> ())?
+    var routeToOffGameHandler: (() -> Void)?
     var routeToOffGameCallCount: Int = 0
-    var loadHandler: (() -> ())?
+    var loadHandler: (() -> Void)?
     var loadCallCount: Int = 0
-    var attachChildHandler: ((_ child: Routing) -> ())?
+    var attachChildHandler: ((_ child: Routing) -> Void)?
     var attachChildCallCount: Int = 0
-    var detachChildHandler: ((_ child: Routing) -> ())?
+    var detachChildHandler: ((_ child: Routing) -> Void)?
     var detachChildCallCount: Int = 0
 
     init(interactable: Interactable) {
@@ -197,22 +229,39 @@ class LoggedOutBuildableMock: LoggedOutBuildable {
 /// A RootInteractableMock class used for testing.
 class RootInteractableMock: RootInteractable {
     // Variables
-    var router: RootRouting? { didSet { routerSetCallCount += 1 } }
+    var router: RootRouting? {
+        didSet {
+            routerSetCallCount += 1
+        } }
     var routerSetCallCount = 0
-    var listener: RootListener? { didSet { listenerSetCallCount += 1 } }
+    var listener: RootListener? {
+        didSet {
+            listenerSetCallCount += 1
+        }
+    }
     var listenerSetCallCount = 0
-    var isActive: Bool = false { didSet { isActiveSetCallCount += 1 } }
+    var isActive: Bool = false {
+        didSet {
+            isActiveSetCallCount += 1
+        }
+    }
     var isActiveSetCallCount = 0
-    var isActiveStreamSubject: PublishSubject<Bool> = PublishSubject<Bool>() { didSet { isActiveStreamSubjectSetCallCount += 1 } }
+    var isActiveStreamSubject: PublishSubject<Bool> = PublishSubject<Bool>() {
+        didSet {
+            isActiveStreamSubjectSetCallCount += 1
+        }
+    }
     var isActiveStreamSubjectSetCallCount = 0
-    var isActiveStream: Observable<Bool> { return isActiveStreamSubject }
+    var isActiveStream: Observable<Bool> {
+        return isActiveStreamSubject
+    }
 
     // Function Handlers
-    var activateHandler: (() -> ())?
+    var activateHandler: (() -> Void)?
     var activateCallCount: Int = 0
-    var deactivateHandler: (() -> ())?
+    var deactivateHandler: (() -> Void)?
     var deactivateCallCount: Int = 0
-    var didLoginHandler: ((_ player1Name: String, _ player2Name: String) -> ())?
+    var didLoginHandler: ((_ player1Name: String, _ player2Name: String) -> Void)?
     var didLoginCallCount: Int = 0
 
     init() {
@@ -245,13 +294,17 @@ class RootInteractableMock: RootInteractable {
 /// A RootViewControllableMock class used for testing.
 class RootViewControllableMock: RootViewControllable {
     // Variables
-    var uiviewController: UIViewController = UIViewController() { didSet { uiviewControllerSetCallCount += 1 } }
+    var uiviewController: UIViewController = UIViewController() {
+        didSet {
+            uiviewControllerSetCallCount += 1
+        }
+    }
     var uiviewControllerSetCallCount = 0
 
     // Function Handlers
-    var presentHandler: ((_ viewController: ViewControllable) -> ())?
+    var presentHandler: ((_ viewController: ViewControllable) -> Void)?
     var presentCallCount: Int = 0
-    var dismissHandler: ((_ viewController: ViewControllable) -> ())?
+    var dismissHandler: ((_ viewController: ViewControllable) -> Void)?
     var dismissCallCount: Int = 0
 
     init() {
