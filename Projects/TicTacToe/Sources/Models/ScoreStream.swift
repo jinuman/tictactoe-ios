@@ -51,4 +51,3 @@ class ScoreStreamImpl: MutableScoreStream {
 
     private let scoreRelay = BehaviorRelay<Score>(value: Score(player1Score: 0, player2Score: 0))
 }
-
