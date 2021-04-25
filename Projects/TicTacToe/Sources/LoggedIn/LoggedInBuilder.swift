@@ -12,9 +12,16 @@ protocol LoggedInDependency: Dependency {
 }
 
 final class LoggedInComponent: Component<LoggedInDependency> {
-
     let player1Name: String
     let player2Name: String
+
+    fileprivate var loggedInViewController: LoggedInViewControllable {
+        return super.dependency.loggedInViewController
+    }
+
+    var mutableScoreStream: MutableScoreStream {
+        return super.shared { ScoreStreamImpl() }
+    }
 
     init(
         dependency: LoggedInDependency,
@@ -24,10 +31,6 @@ final class LoggedInComponent: Component<LoggedInDependency> {
         self.player1Name = player1Name
         self.player2Name = player2Name
         super.init(dependency: dependency)
-    }
-
-    fileprivate var loggedInViewController: LoggedInViewControllable {
-        return super.dependency.loggedInViewController
     }
 }
 
@@ -57,7 +60,7 @@ final class LoggedInBuilder: Builder<LoggedInDependency>, LoggedInBuildable {
             player1Name: player1Name,
             player2Name: player2Name
         )
-        let interactor = LoggedInInteractor()
+        let interactor = LoggedInInteractor(mutableScoreStream: component.mutableScoreStream)
         interactor.listener = listener
 
         let offGameBuilder = OffGameBuilder(dependency: component)

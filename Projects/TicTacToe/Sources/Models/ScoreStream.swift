@@ -27,7 +27,7 @@ protocol MutableScoreStream: ScoreStream {
 
 class ScoreStreamImpl: MutableScoreStream {
     var score: Observable<Score> {
-        return variable
+        return self.scoreRelay
             .asObservable()
             .distinctUntilChanged { (lhs: Score, rhs: Score) -> Bool in
                 Score.equals(lhs: lhs, rhs: rhs)
@@ -36,7 +36,7 @@ class ScoreStreamImpl: MutableScoreStream {
 
     func updateScore(withWinner winner: PlayerType) {
         let newScore: Score = {
-            let currentScore = variable.value
+            let currentScore = self.scoreRelay.value
             switch winner {
             case .player1:
                 return Score(player1Score: currentScore.player1Score + 1, player2Score: currentScore.player2Score)
@@ -44,11 +44,11 @@ class ScoreStreamImpl: MutableScoreStream {
                 return Score(player1Score: currentScore.player1Score, player2Score: currentScore.player2Score + 1)
             }
         }()
-        variable.value = newScore
+        self.scoreRelay.accept(newScore)
     }
 
     // MARK: - Private
 
-    private let variable = BehaviorRelay<Score>(value: Score(player1Score: 0, player2Score: 0))
+    private let scoreRelay = BehaviorRelay<Score>(value: Score(player1Score: 0, player2Score: 0))
 }
 
