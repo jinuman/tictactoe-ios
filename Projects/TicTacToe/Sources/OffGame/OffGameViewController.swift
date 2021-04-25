@@ -99,10 +99,10 @@ final class OffGameViewController:
 
     private func configurePlayer() {
         let player1Score = self.score?.player1Score ?? 0
-        self.player1Label.text = "\(self.player1Name) \(player1Score)"
+        self.player1Label.text = "\(self.player1Name) (\(player1Score))"
 
         let player2Score = self.score?.player2Score ?? 0
-        self.player2Label.text = "\(self.player2Name) \(player2Score)"
+        self.player2Label.text = "\(self.player2Name) (\(player2Score))"
     }
 
 

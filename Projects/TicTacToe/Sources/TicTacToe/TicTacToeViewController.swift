@@ -78,7 +78,7 @@ final class TicTacToeViewController:
                     return "\(self.player2Name) Won!"
                 }
             } else {
-                return "It's a Tie!"
+                return "It's a Tie"
             }
         }()
         let alertController = UIAlertController(
