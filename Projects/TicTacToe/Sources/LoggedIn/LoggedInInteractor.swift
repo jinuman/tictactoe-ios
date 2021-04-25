@@ -8,6 +8,11 @@
 import RIBs
 import RxSwift
 
+enum PlayerType: Int {
+    case player1 = 1
+    case player2
+}
+
 protocol LoggedInRouting: Routing {
     func cleanupViews()
     func routeToTicTacToe()
