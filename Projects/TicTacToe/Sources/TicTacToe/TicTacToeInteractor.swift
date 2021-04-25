@@ -36,9 +36,16 @@ final class TicTacToeInteractor:
     TicTacToeInteractable,
     TicTacToePresentableListener {
 
-    weak var router: TicTacToeRouting?
+    // MARK: - Properties
 
+    weak var router: TicTacToeRouting?
     weak var listener: TicTacToeListener?
+
+    private var currentPlayer = PlayerType.player1
+    private var board = [[PlayerType?]]()
+
+
+    // MARK: - Initializing
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
@@ -46,6 +53,9 @@ final class TicTacToeInteractor:
         super.init(presenter: presenter)
         presenter.listener = self
     }
+
+
+    // MARK: - Lifecycle
 
     override func didBecomeActive() {
         super.didBecomeActive()
@@ -57,6 +67,7 @@ final class TicTacToeInteractor:
         super.willResignActive()
         // TODO: Pause any business logic.
     }
+
 
     // MARK: - TicTacToePresentableListener
 
@@ -75,12 +86,9 @@ final class TicTacToeInteractor:
             }
         }
     }
-    
 
-    // MARK: - Private
 
-    private var currentPlayer = PlayerType.player1
-    private var board = [[PlayerType?]]()
+    // MARK: - Private Methods
 
     private func initBoard() {
         for _ in 0..<GameConstants.rowCount {
