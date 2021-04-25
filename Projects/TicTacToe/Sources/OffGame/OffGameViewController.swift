@@ -69,7 +69,6 @@ final class OffGameViewController:
         self.player1Name = player1Name
         self.player2Name = player2Name
         super.init()
-        self.bind()
     }
 
 
@@ -78,6 +77,7 @@ final class OffGameViewController:
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.yellow
+        self.bind()
     }
 
 

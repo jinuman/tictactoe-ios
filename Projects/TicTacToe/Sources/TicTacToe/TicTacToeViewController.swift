@@ -20,14 +20,24 @@ import UIKit
 
 protocol TicTacToePresentableListener: class {
     func placeCurrentPlayerMark(atRow row: Int, col: Int)
-    func closeGame()
 }
 
-final class TicTacToeViewController: UIViewController, TicTacToePresentable, TicTacToeViewControllable {
+final class TicTacToeViewController:
+    UIViewController,
+    TicTacToePresentable,
+    TicTacToeViewControllable {
 
     weak var listener: TicTacToePresentableListener?
 
-    init() {
+    private let player1Name: String
+    private let player2Name: String
+
+    init(
+        player1Name: String,
+        player2Name: String
+    ) {
+        self.player1Name = player1Name
+        self.player2Name = player2Name
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -58,21 +68,32 @@ final class TicTacToeViewController: UIViewController, TicTacToePresentable, Tic
         cell?.backgroundColor = color
     }
 
-    func announce(winner: PlayerType) {
+    func announce(winner: PlayerType?, withCompletionHandler handler: @escaping () -> Void) {
         let winnerString: String = {
-            switch winner {
-            case .player1:
-                return "Red"
-            case .player2:
-                return "Blue"
+            if let winner = winner {
+                switch winner {
+                case .player1:
+                    return "Red Won!"
+                case .player2:
+                    return "Blue Won!"
+                }
+            } else {
+                return "It's a Tie!"
             }
         }()
-        let alert = UIAlertController(title: "\(winnerString) Won!", message: nil, preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "Close Game", style: UIAlertAction.Style.default) { [weak self] _ in
-            self?.listener?.closeGame()
+        let alertController = UIAlertController(
+            title: winnerString,
+            message: nil,
+            preferredStyle: .alert
+        )
+        let closeAction = UIAlertAction(
+            title: "Close Game",
+            style: UIAlertAction.Style.default
+        ) { _ in
+            handler()
         }
-        alert.addAction(closeAction)
-        present(alert, animated: true, completion: nil)
+        alertController.addAction(closeAction)
+        present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - Private

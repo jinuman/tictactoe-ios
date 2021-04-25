@@ -24,14 +24,17 @@ protocol TicTacToeRouting: ViewableRouting {
 protocol TicTacToePresentable: Presentable {
     var listener: TicTacToePresentableListener? { get set }
     func setCell(atRow row: Int, col: Int, withPlayerType playerType: PlayerType)
-    func announce(winner: PlayerType)
+    func announce(winner: PlayerType?, withCompletionHandler handler: @escaping () -> Void)
 }
 
 protocol TicTacToeListener: class {
-    func gameDidEnd()
+    func gameDidEnd(withWinner winner: PlayerType?)
 }
 
-final class TicTacToeInteractor: PresentableInteractor<TicTacToePresentable>, TicTacToeInteractable, TicTacToePresentableListener {
+final class TicTacToeInteractor:
+    PresentableInteractor<TicTacToePresentable>,
+    TicTacToeInteractable,
+    TicTacToePresentableListener {
 
     weak var router: TicTacToeRouting?
 
@@ -66,14 +69,13 @@ final class TicTacToeInteractor: PresentableInteractor<TicTacToePresentable>, Ti
         board[row][col] = currentPlayer
         presenter.setCell(atRow: row, col: col, withPlayerType: currentPlayer)
 
-        if let winner = checkWinner() {
-            presenter.announce(winner: winner)
+        if let winner = self.checkWinner() {
+            self.presenter.announce(winner: winner) {
+                self.listener?.gameDidEnd(withWinner: winner)
+            }
         }
     }
-
-    func closeGame() {
-        self.listener?.gameDidEnd()
-    }
+    
 
     // MARK: - Private
 
@@ -99,11 +101,9 @@ final class TicTacToeInteractor: PresentableInteractor<TicTacToePresentable>, Ti
                 continue
             }
             var winner: PlayerType? = assumedWinner
-            for col in 1..<GameConstants.colCount {
-                if assumedWinner.rawValue != board[row][col]?.rawValue {
-                    winner = nil
-                    break
-                }
+            for col in 1..<GameConstants.colCount where assumedWinner.rawValue != board[row][col]?.rawValue {
+                winner = nil
+                break
             }
             if let winner = winner {
                 return winner
@@ -116,11 +116,9 @@ final class TicTacToeInteractor: PresentableInteractor<TicTacToePresentable>, Ti
                 continue
             }
             var winner: PlayerType? = assumedWinner
-            for row in 1..<GameConstants.rowCount {
-                if assumedWinner.rawValue != board[row][col]?.rawValue {
-                    winner = nil
-                    break
-                }
+            for row in 1 ..< GameConstants.rowCount where assumedWinner.rawValue != board[row][col]?.rawValue {
+                winner = nil
+                break
             }
             if let winner = winner {
                 return winner
