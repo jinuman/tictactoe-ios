@@ -30,9 +30,15 @@ final class OffGameInteractor:
     weak var router: OffGameRouting?
     weak var listener: OffGameListener?
 
+    private let scoreStream: ScoreStream
+
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: OffGamePresentable) {
+    init(
+        presenter: OffGamePresentable,
+        scoreStream: ScoreStream
+    ) {
+        self.scoreStream = scoreStream
         super.init(presenter: presenter)
         presenter.listener = self
     }
