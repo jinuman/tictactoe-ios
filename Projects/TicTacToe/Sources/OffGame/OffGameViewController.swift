@@ -32,6 +32,7 @@ final class OffGameViewController:
 
     private let player1Name: String
     private let player2Name: String
+    private var score: Score?
 
 
     // MARK: UI
@@ -83,15 +84,32 @@ final class OffGameViewController:
     // MARK: - Binding
 
     private func bind() {
+        self.bindStart()
+        self.configurePlayer()
+    }
+
+    private func bindStart() {
         self.startButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.listener?.startGame()
             })
             .disposed(by: self.disposeBag)
+    }
 
-        self.player1Label.text = self.player1Name
-        self.player2Label.text = self.player2Name
+    private func configurePlayer() {
+        let player1Score = self.score?.player1Score ?? 0
+        self.player1Label.text = "\(self.player1Name) \(player1Score)"
+
+        let player2Score = self.score?.player2Score ?? 0
+        self.player2Label.text = "\(self.player2Name) \(player2Score)"
+    }
+
+
+    // MARK: - OffGamePresentable
+
+    func set(score: Score) {
+        self.score = score
     }
 
 
@@ -126,6 +144,17 @@ final class OffGameViewController:
             $0.center.equalTo(self.view)
             $0.leading.trailing.equalTo(self.view).inset(40)
             $0.height.equalTo(100)
+        }
+    }
+}
+
+extension PlayerType {
+    var color: UIColor {
+        switch self {
+        case .player1:
+            return UIColor.red
+        case .player2:
+            return UIColor.blue
         }
     }
 }

@@ -15,6 +15,7 @@ protocol OffGameRouting: ViewableRouting {
 protocol OffGamePresentable: Presentable {
     var listener: OffGamePresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func set(score: Score)
 }
 
 protocol OffGameListener: class {
@@ -46,11 +47,20 @@ final class OffGameInteractor:
     override func didBecomeActive() {
         super.didBecomeActive()
         // TODO: Implement business logic here.
+        self.updateScore()
     }
 
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+
+    private func updateScore() {
+        self.scoreStream.score
+            .subscribe(onNext: { (score: Score) in
+                self.presenter.set(score: score)
+            })
+            .disposeOnDeactivate(interactor: self)
     }
 
 
