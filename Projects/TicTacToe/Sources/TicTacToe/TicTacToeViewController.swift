@@ -73,9 +73,9 @@ final class TicTacToeViewController:
             if let winner = winner {
                 switch winner {
                 case .player1:
-                    return "Red Won!"
+                    return "\(self.player1Name) Won!"
                 case .player2:
-                    return "Blue Won!"
+                    return "\(self.player2Name) Won!"
                 }
             } else {
                 return "It's a Tie!"

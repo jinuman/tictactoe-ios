@@ -40,7 +40,7 @@ final class OffGameViewController:
     private let player1Label = UILabel().then {
         $0.font = UIFont.boldSystemFont(ofSize: 35)
         $0.backgroundColor = .clear
-        $0.textColor = .blue
+        $0.textColor = PlayerType.player1.color
         $0.textAlignment = .center
     }
     private let vsLabel = UILabel().then {
@@ -53,7 +53,7 @@ final class OffGameViewController:
     private let player2Label = UILabel().then {
         $0.font = UIFont.boldSystemFont(ofSize: 35)
         $0.backgroundColor = .clear
-        $0.textColor = .red
+        $0.textColor = PlayerType.player2.color
         $0.textAlignment = .center
     }
     private let startButton = UIButton().then {

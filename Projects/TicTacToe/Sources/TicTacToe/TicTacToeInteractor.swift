@@ -111,7 +111,7 @@ final class TicTacToeInteractor:
         }
 
         // Cols.
-        for col in 0..<GameConstants.colCount {
+        for col in 0 ..< GameConstants.colCount {
             guard let assumedWinner = board[0][col] else {
                 continue
             }
