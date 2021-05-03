@@ -6,7 +6,6 @@ use_frameworks!
 platform :ios, '11.0'
 
 # Rx
-pod 'RxSwift', '~> 5'
 pod 'RxCocoa'
 
 # Architecture
